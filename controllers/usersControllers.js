@@ -32,22 +32,4 @@ module.exports = {
       res.status(500).send("Something happened, Hermann");
     }
   },
-  register: async (req, res) => {
-    const { first_name, last_name, prime, email, passowrd } = req.body;
-    try {
-      const data = await pool.query(
-        "INSERT INTO users (first_name, last_name, prime, email, password) VALUES ($1, $2, $3, $4, $5)",
-        [first_name, last_name, prime, email, passowrd]
-      );
-      res.json({
-        code: 200,
-        operation: "success",
-        description: "You've been registered",
-        data: data.rows,
-      });
-    } catch (e) {
-      console.error(Error(e));
-      res.status(500).send("Something happened, Hermann");
-    }
-  },
 };
